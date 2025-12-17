@@ -103,7 +103,9 @@ npm run build
 
 ## 📝 Adding New Components
 
-### 1. Create Component Source
+### Adding Atomic Components (UI Primitives)
+
+#### 1. Create Component Source
 
 Add your component file in `src/components/ui/`:
 
@@ -119,7 +121,7 @@ export function MyComponent({ className, ...props }: React.ComponentProps<"div">
 }
 ```
 
-### 2. Create Registry Manifest
+#### 2. Create Registry Manifest
 
 Create a manifest file in `src/components/ui/my-component/`:
 
@@ -132,16 +134,16 @@ Create a manifest file in `src/components/ui/my-component/`:
   "description": "UI component for my-component.",
   "files": [
     {
-      "path": "src/components/ui/my-component/my-component.tsx",
+      "path": "src/components/ui/my-component.tsx",
       "type": "registry:component"
     }
   ]
 }
 ```
 
-### 3. Update Registry Index
+#### 3. Update Registry Index
 
-Add the component to `registry.json`:
+Add the component to `registry.json`. The build process will read the file and embed its content:
 
 ```json
 {
@@ -150,21 +152,97 @@ Add the component to `registry.json`:
   "files": [
     {
       "path": "src/components/ui/my-component.tsx",
-      "content": "...",
       "type": "registry:ui"
     }
   ]
 }
 ```
 
-### 4. Validate and Build
+#### 4. Validate and Build
 
 ```bash
 # Validate the new component
 npm run registry:validate
 
-# Build the registry
+# Build the registry (reads files and embeds content)
 npm run registry:build
+```
+
+### Adding Blocks (Composite Components)
+
+#### 1. Create Block Source
+
+Add your block file in `src/blocks/`:
+
+```tsx
+// src/blocks/payment-form.tsx
+import { Card, CardHeader, CardContent } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+
+export function PaymentForm() {
+  return (
+    <Card>
+      <CardHeader>Payment</CardHeader>
+      <CardContent className="flex flex-col gap-2">
+        {/* Your block implementation */}
+      </CardContent>
+    </Card>
+  )
+}
+```
+
+#### 2. Update Registry Index
+
+Add the block entry to `registry.json` with its dependencies:
+
+```json
+{
+  "name": "payment-form",
+  "type": "registry:block",
+  "title": "Payment Form",
+  "description": "Payment form block using Card, Input, Label, Button.",
+  "registryDependencies": ["card", "input", "label", "button"],
+  "files": [
+    {
+      "path": "src/blocks/payment-form.tsx",
+      "type": "registry:component"
+    }
+  ]
+}
+```
+
+**Key points:**
+- `path` points to your block file (the build process will read and embed its content)
+- `registryDependencies` lists the atomic components this block depends on
+- `type: "registry:block"` identifies it as a composite block
+
+#### 3. Build and Deploy
+
+```bash
+# Build the registry (reads block file and embeds content)
+npm run registry:build
+
+# Commit and push (triggers automatic GitHub Pages deployment)
+git add registry.json src/blocks/payment-form.tsx
+git commit -m "Add payment-form block"
+git push origin main
+```
+
+After deployment (2-3 minutes), the block will be available at:
+- `https://helvetiaai.github.io/ui-registry/payment-form.json`
+
+#### 4. Verify Installation
+
+Test in a consuming project:
+
+```bash
+# Verify block is accessible
+curl -I https://helvetiaai.github.io/ui-registry/payment-form.json
+
+# Install the block
+npx shadcn add @local/payment-form
 ```
 
 ## 🏗️ Building the Registry

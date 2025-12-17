@@ -60,6 +60,90 @@
           "type": "registry:component"
         }
       ]
+    },
+    {
+      "name": "empty-state",
+      "type": "registry:block",
+      "title": "Empty State",
+      "description": "Empty state UI block with icon and call-to-action button.",
+      "registryDependencies": ["card", "button"],
+      "files": [
+        {
+          "path": "src/blocks/empty-state.tsx",
+          "content": "import { Button } from \"@/components/ui/button\"\nimport { Card, CardContent, CardDescription, CardHeader, CardTitle } from \"@/components/ui/card\"\n\nexport function EmptyState() {\n  return (\n    <Card>\n      <CardHeader className=\"text-center\">\n        <CardTitle>No items found</CardTitle>\n        <CardDescription>\n          Get started by creating a new item.\n        </CardDescription>\n      </CardHeader>\n      <CardContent className=\"flex flex-col items-center gap-4\">\n        <div className=\"flex h-20 w-20 items-center justify-center rounded-full bg-muted\">\n          <svg\n            xmlns=\"http://www.w3.org/2000/svg\"\n            width=\"24\"\n            height=\"24\"\n            viewBox=\"0 0 24 24\"\n            fill=\"none\"\n            stroke=\"currentColor\"\n            strokeWidth=\"2\"\n            strokeLinecap=\"round\"\n            strokeLinejoin=\"round\"\n            className=\"text-muted-foreground\"\n          >\n            <path d=\"M5 12h14\" />\n            <path d=\"M12 5v14\" />\n          </svg>\n        </div>\n        <Button>Create new item</Button>\n      </CardContent>\n    </Card>\n  )\n}\n",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "payment-form",
+      "type": "registry:block",
+      "title": "Payment Form",
+      "description": "Payment form block with card details input fields.",
+      "registryDependencies": ["card", "input", "label", "button", "separator"],
+      "files": [
+        {
+          "path": "src/blocks/payment-form.tsx",
+          "content": "import { Button } from \"@/components/ui/button\"\nimport { Card, CardContent, CardDescription, CardHeader, CardTitle } from \"@/components/ui/card\"\nimport { Input } from \"@/components/ui/input\"\nimport { Label } from \"@/components/ui/label\"\nimport { Separator } from \"@/components/ui/separator\"\n\nexport function PaymentForm() {\n  return (\n    <Card>\n      <CardHeader>\n        <CardTitle>Payment Information</CardTitle>\n        <CardDescription>Enter your payment details to complete the purchase.</CardDescription>\n      </CardHeader>\n      <CardContent className=\"flex flex-col gap-4\">\n        <div className=\"flex flex-col gap-2\">\n          <Label htmlFor=\"card-number\">Card Number</Label>\n          <Input id=\"card-number\" type=\"text\" placeholder=\"1234 5678 9012 3456\" />\n        </div>\n        <div className=\"grid grid-cols-2 gap-4\">\n          <div className=\"flex flex-col gap-2\">\n            <Label htmlFor=\"expiry\">Expiry Date</Label>\n            <Input id=\"expiry\" type=\"text\" placeholder=\"MM/YY\" />\n          </div>\n          <div className=\"flex flex-col gap-2\">\n            <Label htmlFor=\"cvv\">CVV</Label>\n            <Input id=\"cvv\" type=\"text\" placeholder=\"123\" />\n          </div>\n        </div>\n        <Separator />\n        <div className=\"flex flex-col gap-2\">\n          <Label htmlFor=\"cardholder\">Cardholder Name</Label>\n          <Input id=\"cardholder\" type=\"text\" placeholder=\"John Doe\" />\n        </div>\n        <Button className=\"w-full\">Pay Now</Button>\n      </CardContent>\n    </Card>\n  )\n}\n",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "profile-card",
+      "type": "registry:block",
+      "title": "Profile Card",
+      "description": "User profile card with avatar, details, and action buttons.",
+      "registryDependencies": ["card", "badge", "button", "separator"],
+      "files": [
+        {
+          "path": "src/blocks/profile-card.tsx",
+          "content": "import { Badge } from \"@/components/ui/badge\"\nimport { Button } from \"@/components/ui/button\"\nimport { Card, CardContent, CardDescription, CardHeader, CardTitle } from \"@/components/ui/card\"\nimport { Separator } from \"@/components/ui/separator\"\n\nexport function ProfileCard() {\n  return (\n    <Card>\n      <CardHeader>\n        <div className=\"flex items-start justify-between\">\n          <div className=\"flex flex-col gap-1\">\n            <CardTitle>John Doe</CardTitle>\n            <CardDescription>Software Engineer</CardDescription>\n          </div>\n          <Badge variant=\"secondary\">Active</Badge>\n        </div>\n      </CardHeader>\n      <CardContent className=\"flex flex-col gap-4\">\n        <div className=\"flex items-center gap-4\">\n          <div className=\"flex h-16 w-16 items-center justify-center rounded-full bg-muted\">\n            <span className=\"text-2xl font-semibold text-muted-foreground\">JD</span>\n          </div>\n          <div className=\"flex flex-col gap-1\">\n            <p className=\"text-sm font-medium\">john.doe@example.com</p>\n            <p className=\"text-sm text-muted-foreground\">San Francisco, CA</p>\n          </div>\n        </div>\n        <Separator />\n        <div className=\"flex flex-col gap-2\">\n          <div className=\"flex items-center justify-between text-sm\">\n            <span className=\"text-muted-foreground\">Member since</span>\n            <span className=\"font-medium\">Jan 2024</span>\n          </div>\n          <div className=\"flex items-center justify-between text-sm\">\n            <span className=\"text-muted-foreground\">Projects</span>\n            <span className=\"font-medium\">12</span>\n          </div>\n        </div>\n        <div className=\"flex gap-2\">\n          <Button variant=\"outline\" className=\"flex-1\">Edit Profile</Button>\n          <Button className=\"flex-1\">View Details</Button>\n        </div>\n      </CardContent>\n    </Card>\n  )\n}\n",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "settings-form",
+      "type": "registry:block",
+      "title": "Settings Form",
+      "description": "Settings form block with profile and password fields.",
+      "registryDependencies": ["card", "input", "label", "button", "separator", "textarea"],
+      "files": [
+        {
+          "path": "src/blocks/settings-form.tsx",
+          "content": "import { Button } from \"@/components/ui/button\"\nimport { Card, CardContent, CardDescription, CardHeader, CardTitle } from \"@/components/ui/card\"\nimport { Input } from \"@/components/ui/input\"\nimport { Label } from \"@/components/ui/label\"\nimport { Separator } from \"@/components/ui/separator\"\nimport { Textarea } from \"@/components/ui/textarea\"\n\nexport function SettingsForm() {\n  return (\n    <Card>\n      <CardHeader>\n        <CardTitle>Settings</CardTitle>\n        <CardDescription>Manage your account settings and preferences.</CardDescription>\n      </CardHeader>\n      <CardContent className=\"flex flex-col gap-6\">\n        <div className=\"flex flex-col gap-4\">\n          <div className=\"flex flex-col gap-2\">\n            <Label htmlFor=\"name\">Full Name</Label>\n            <Input id=\"name\" type=\"text\" placeholder=\"John Doe\" />\n          </div>\n          <div className=\"flex flex-col gap-2\">\n            <Label htmlFor=\"email\">Email</Label>\n            <Input id=\"email\" type=\"email\" placeholder=\"john@example.com\" />\n          </div>\n          <div className=\"flex flex-col gap-2\">\n            <Label htmlFor=\"bio\">Bio</Label>\n            <Textarea id=\"bio\" placeholder=\"Tell us about yourself\" rows={4} />\n          </div>\n        </div>\n        <Separator />\n        <div className=\"flex flex-col gap-4\">\n          <div className=\"flex flex-col gap-2\">\n            <Label htmlFor=\"password\">New Password</Label>\n            <Input id=\"password\" type=\"password\" placeholder=\"••••••••\" />\n          </div>\n          <div className=\"flex flex-col gap-2\">\n            <Label htmlFor=\"confirm-password\">Confirm Password</Label>\n            <Input id=\"confirm-password\" type=\"password\" placeholder=\"••••••••\" />\n          </div>\n        </div>\n        <div className=\"flex justify-end gap-2\">\n          <Button variant=\"outline\">Cancel</Button>\n          <Button>Save Changes</Button>\n        </div>\n      </CardContent>\n    </Card>\n  )\n}\n",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "dashboard-card",
+      "type": "registry:block",
+      "title": "Dashboard Card",
+      "description": "Dashboard metric card with revenue display and actions.",
+      "registryDependencies": ["card", "badge", "button"],
+      "files": [
+        {
+          "path": "src/blocks/dashboard-card.tsx",
+          "content": "import { Badge } from \"@/components/ui/badge\"\nimport { Button } from \"@/components/ui/button\"\nimport { Card, CardContent, CardDescription, CardHeader, CardTitle } from \"@/components/ui/card\"\n\nexport function DashboardCard() {\n  return (\n    <Card>\n      <CardHeader>\n        <div className=\"flex items-start justify-between\">\n          <div className=\"flex flex-col gap-1\">\n            <CardTitle>Total Revenue</CardTitle>\n            <CardDescription>Last 30 days</CardDescription>\n          </div>\n          <Badge variant=\"secondary\">+12.5%</Badge>\n        </div>\n      </CardHeader>\n      <CardContent className=\"flex flex-col gap-4\">\n        <div className=\"flex items-baseline gap-2\">\n          <span className=\"text-3xl font-bold\">$45,231</span>\n          <span className=\"text-sm text-muted-foreground\">USD</span>\n        </div>\n        <div className=\"flex items-center gap-2 text-sm text-muted-foreground\">\n          <svg\n            xmlns=\"http://www.w3.org/2000/svg\"\n            width=\"16\"\n            height=\"16\"\n            viewBox=\"0 0 24 24\"\n            fill=\"none\"\n            stroke=\"currentColor\"\n            strokeWidth=\"2\"\n            strokeLinecap=\"round\"\n            strokeLinejoin=\"round\"\n          >\n            <path d=\"M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6\" />\n          </svg>\n          <span>Compared to last month</span>\n        </div>\n        <div className=\"flex gap-2\">\n          <Button variant=\"outline\" className=\"flex-1\">View Report</Button>\n          <Button className=\"flex-1\">Export</Button>\n        </div>\n      </CardContent>\n    </Card>\n  )\n}\n",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "complex-form",
+      "type": "registry:block",
+      "title": "Complex Form",
+      "description": "Multi-field contact form with validation checkbox.",
+      "registryDependencies": ["card", "input", "label", "button", "separator", "textarea"],
+      "files": [
+        {
+          "path": "src/blocks/complex-form.tsx",
+          "content": "import { Button } from \"@/components/ui/button\"\nimport { Card, CardContent, CardDescription, CardHeader, CardTitle } from \"@/components/ui/card\"\nimport { Input } from \"@/components/ui/input\"\nimport { Label } from \"@/components/ui/label\"\nimport { Separator } from \"@/components/ui/separator\"\nimport { Textarea } from \"@/components/ui/textarea\"\n\nexport function ComplexForm() {\n  return (\n    <Card>\n      <CardHeader>\n        <CardTitle>Contact Form</CardTitle>\n        <CardDescription>Fill out the form below and we'll get back to you as soon as possible.</CardDescription>\n      </CardHeader>\n      <CardContent className=\"flex flex-col gap-6\">\n        <div className=\"grid grid-cols-2 gap-4\">\n          <div className=\"flex flex-col gap-2\">\n            <Label htmlFor=\"first-name\">First Name</Label>\n            <Input id=\"first-name\" type=\"text\" placeholder=\"John\" />\n          </div>\n          <div className=\"flex flex-col gap-2\">\n            <Label htmlFor=\"last-name\">Last Name</Label>\n            <Input id=\"last-name\" type=\"text\" placeholder=\"Doe\" />\n          </div>\n        </div>\n        <div className=\"flex flex-col gap-2\">\n          <Label htmlFor=\"email\">Email</Label>\n          <Input id=\"email\" type=\"email\" placeholder=\"john@example.com\" />\n        </div>\n        <div className=\"flex flex-col gap-2\">\n          <Label htmlFor=\"phone\">Phone Number</Label>\n          <Input id=\"phone\" type=\"tel\" placeholder=\"+1 (555) 000-0000\" />\n        </div>\n        <Separator />\n        <div className=\"flex flex-col gap-2\">\n          <Label htmlFor=\"subject\">Subject</Label>\n          <Input id=\"subject\" type=\"text\" placeholder=\"How can we help?\" />\n        </div>\n        <div className=\"flex flex-col gap-2\">\n          <Label htmlFor=\"message\">Message</Label>\n          <Textarea id=\"message\" placeholder=\"Enter your message here...\" rows={6} />\n        </div>\n        <div className=\"flex items-center gap-2\">\n          <input type=\"checkbox\" id=\"terms\" className=\"h-4 w-4 rounded border-input\" />\n          <Label htmlFor=\"terms\" className=\"text-sm font-normal cursor-pointer\">\n            I agree to the terms and conditions\n          </Label>\n        </div>\n        <div className=\"flex justify-end gap-2\">\n          <Button variant=\"outline\">Cancel</Button>\n          <Button>Submit</Button>\n        </div>\n      </CardContent>\n    </Card>\n  )\n}\n",
+          "type": "registry:component"
+        }
+      ]
     }
   ]
 }
