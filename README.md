@@ -161,7 +161,7 @@ npm run registry:build
 
 ## 🏗️ Building the Registry
 
-The build process generates installable registry files in `public/r/`:
+The build process generates installable registry files in both `public/r/` and `dist/`:
 
 ```bash
 # Build registry (includes automatic validation)
@@ -173,17 +173,22 @@ This command:
 1. Validates all `registry-item.json` files (via `prebuild` hook)
 2. Reads `registry.json` and component manifests
 3. Generates individual JSON files in `public/r/`
-4. Includes full file content, dependencies, and metadata
-5. Validates output against Shadcn schema
+4. Copies all JSON files to `dist/` for GitHub Pages deployment
+5. Includes full file content, dependencies, and metadata
+6. Validates output against Shadcn schema
 
 ### Generated Files
 
-After building, `public/r/` contains:
+After building, both directories contain the registry files:
 
+- **`public/r/`** - Development/backup location
+- **`dist/`** - GitHub Pages deployment directory
+
+Each contains:
 - `registry.json` - Master index of all items
 - `{component-name}.json` - Individual component files with full content
 
-These files are ready to be deployed to static hosting.
+The `dist/` folder is tracked in git and ready for GitHub Pages deployment.
 
 ## ✅ Validation
 
@@ -290,35 +295,54 @@ npx shadcn add @ui/alert-dialog
 
 ## 🚢 Deployment
 
-### Static Hosting
+### GitHub Pages
 
-Deploy the `public/r/` directory to any static hosting service:
+The registry is configured for GitHub Pages deployment using the `dist/` directory:
 
 1. **Build the registry**: `npm run registry:build`
-2. **Deploy `public/r/`** to your hosting (Vercel, Netlify, S3, etc.)
-3. **Update registry URL** in consuming projects' `components.json`
+2. **Commit and push** the `dist/` folder:
+   ```bash
+   git add dist/
+   git commit -m "Update registry files"
+   git push
+   ```
+3. **Configure GitHub Pages**:
+   - Go to repository Settings → Pages
+   - Source: `Deploy from branch`
+   - Branch: `main` (or your default branch)
+   - Folder: `/dist`
+   - Click Save
 
-### Example Deployment
+### Registry URL for GitHub Pages
 
-```bash
-# Build
-npm run registry:build
-
-# Deploy public/r/ to your hosting
-# Example: Vercel, Netlify, or S3
-```
-
-### Registry URL
-
-After deployment, update consuming projects:
+After deployment, consuming projects should use:
 
 ```json
 {
   "registries": {
-    "@local": "https://your-registry-domain.com/r/{name}.json"
+    "@local": "https://helvetiaai.github.io/ui-registry/{name}.json",
+    "@ui": "https://ui.shadcn.com/r/{name}.json"
   }
 }
 ```
+
+Replace `helvetiaai` with your GitHub username or organization name.
+
+### Other Static Hosting
+
+For other hosting services (Vercel, Netlify, S3, etc.):
+
+1. **Build the registry**: `npm run registry:build`
+2. **Deploy `dist/`** directory to your hosting service
+3. **Update registry URL** in consuming projects' `components.json`
+
+### Example URLs
+
+After deployment, registry files will be accessible at:
+
+- `https://helvetiaai.github.io/ui-registry/registry.json`
+- `https://helvetiaai.github.io/ui-registry/button.json`
+- `https://helvetiaai.github.io/ui-registry/card.json`
 
 ## 🔍 Troubleshooting
 
