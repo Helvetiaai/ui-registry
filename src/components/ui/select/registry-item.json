@@ -1,0 +1,12 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "select",
+  "type": "registry:ui",
+  "description": "UI component for select.",
+  "files": [
+    {
+      "path": "src/components/ui/select/select.tsx",
+      "type": "registry:component"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "input",
+  "type": "registry:ui",
+  "description": "UI component for input.",
+  "files": [
+    {
+      "path": "src/components/ui/input/input.tsx",
+      "type": "registry:component"
+    }
+  ]
+}

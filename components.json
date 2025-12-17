@@ -20,5 +20,8 @@
   },
   "menuColor": "default",
   "menuAccent": "subtle",
-  "registries": {}
+  "registries": {
+    "@local": "http://localhost:3000/r/{name}.json",
+    "@ui": "https://ui.shadcn.com/r/{name}.json"
+  }
 }

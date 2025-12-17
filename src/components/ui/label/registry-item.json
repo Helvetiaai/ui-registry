@@ -1,0 +1,12 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "label",
+  "type": "registry:ui",
+  "description": "UI component for label.",
+  "files": [
+    {
+      "path": "src/components/ui/label/label.tsx",
+      "type": "registry:component"
+    }
+  ]
+}

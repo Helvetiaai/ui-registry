@@ -1,0 +1,12 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "badge",
+  "type": "registry:ui",
+  "description": "UI component for badge.",
+  "files": [
+    {
+      "path": "src/components/ui/badge/badge.tsx",
+      "type": "registry:component"
+    }
+  ]
+}

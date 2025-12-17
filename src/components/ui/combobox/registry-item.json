@@ -1,0 +1,12 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "combobox",
+  "type": "registry:ui",
+  "description": "UI component for combobox.",
+  "files": [
+    {
+      "path": "src/components/ui/combobox/combobox.tsx",
+      "type": "registry:component"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "field",
+  "type": "registry:ui",
+  "description": "UI component for field.",
+  "files": [
+    {
+      "path": "src/components/ui/field/field.tsx",
+      "type": "registry:component"
+    }
+  ]
+}

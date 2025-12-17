@@ -1,0 +1,12 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "alert-dialog",
+  "type": "registry:ui",
+  "description": "UI component for alert-dialog.",
+  "files": [
+    {
+      "path": "src/components/ui/alert-dialog/alert-dialog.tsx",
+      "type": "registry:component"
+    }
+  ]
+}

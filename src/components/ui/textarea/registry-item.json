@@ -1,0 +1,12 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "textarea",
+  "type": "registry:ui",
+  "description": "UI component for textarea.",
+  "files": [
+    {
+      "path": "src/components/ui/textarea/textarea.tsx",
+      "type": "registry:component"
+    }
+  ]
+}
