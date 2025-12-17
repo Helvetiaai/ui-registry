@@ -58,6 +58,8 @@ The registry is served from GitHub Pages at:
 
 **Note**: Replace `helvetiaai` with your GitHub username or organization name if using a different registry.
 
+GitHub Pages automatically updates within a few minutes of each successful workflow run; deployments are visible under the Actions → Deploy Pages job.
+
 ---
 
 ## 2. Setup
@@ -434,6 +436,8 @@ Run this end-to-end verification to ensure your local setup is correct:
 curl -I https://helvetiaai.github.io/ui-registry/registry.json &&
 npx shadcn add @local/button --dry-run
 ```
+
+Run inside your project root (where `components.json` resides).
 
 This performs a sanity check without installing anything. Both commands should succeed if your setup is correct.
 
