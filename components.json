@@ -4,7 +4,7 @@
   "rsc": false,
   "tsx": true,
   "tailwind": {
-    "config": "",
+    "config": "tailwind.config.js",
     "css": "src/index.css",
     "baseColor": "neutral",
     "cssVariables": true,
@@ -21,7 +21,7 @@
   "menuColor": "default",
   "menuAccent": "subtle",
   "registries": {
-    "@local": "http://localhost:3000/r/{name}.json",
+    "@local": "https://helvetiaai.github.io/ui-registry/{name}.json",
     "@ui": "https://ui.shadcn.com/r/{name}.json"
   }
 }
