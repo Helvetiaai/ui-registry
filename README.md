@@ -40,18 +40,16 @@ ui-registry/
 │       ├── input.json
 │       └── login-block.json
 ├── src/
-│   └── components/
-│       └── ui/
-│           ├── button/
-│           │   └── registry-item.json  # Component manifest
-│           ├── button.tsx              # Component source
-│           ├── card/
-│           │   └── registry-item.json
-│           └── card.tsx
-├── registry/
-│   └── new-york/
-│       └── login-block/
-│           └── login-block.tsx      # Block example
+│   ├── components/
+│   │   └── ui/
+│   │       ├── button/
+│   │       │   └── registry-item.json  # Component manifest
+│   │       ├── button.tsx              # Component source
+│   │       ├── card/
+│   │       │   └── registry-item.json
+│   │       └── card.tsx
+│   └── blocks/
+│       └── login-block.tsx           # Block example
 ├── scripts/
 │   └── validate-registry.js         # Validation script
 └── docs/
