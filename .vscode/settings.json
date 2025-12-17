@@ -1,0 +1,17 @@
+{
+  "git.enableSmartCommit": true,
+  "git.confirmSync": false,
+  "git.autofetch": false,
+  "git.checkoutType": "local",
+  "git.enabled": true,
+  "git.autoRepositoryDetection": true,
+  "git.detectSubmodules": false,
+  "git.ignoreLegacyWarning": true,
+  "git.ignoreMissingGitWarning": false,
+  "git.showPushSuccessNotification": false,
+  "git.suggestSmartCommit": false,
+  "git.supportCancellation": true,
+  "git.timeline.enabled": false,
+  "scm.diffDecorations": "all",
+  "git.decorations.enabled": true
+}
