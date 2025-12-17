@@ -8,6 +8,50 @@ This documentation focuses on **consuming** the registry—installing components
 
 ---
 
+## Functional Vocabulary Mode
+
+The `ui-registry` follows a **Functional Vocabulary** approach, providing neutral, composable UI building blocks based on functional design patterns rather than themed examples.
+
+### Transition to Functional Patterns
+
+All blocks in the registry have been normalized to use **functional names** and **comprehensive prop interfaces**. This means:
+
+- **Neutral naming**: Blocks are named by their function (e.g., `credential-form-block`, `metric-card`) rather than their theme (e.g., `login-block`, `dashboard-card`)
+- **Prop-based configuration**: All hardcoded strings, labels, and data are configurable via typed props
+- **Theme inheritance**: Blocks preserve all Tailwind classes and theme tokens, inheriting your project's theme automatically
+- **Composable primitives**: New UI primitives enable flexible composition without modification
+
+### Block Categories
+
+The registry organizes blocks into functional categories:
+
+| Category | Example Blocks | Description |
+|----------|---------------|-------------|
+| **Layout** | `sidebar-layout`, `section-wrapper` | Structural patterns for page organization |
+| **Forms** | `form-block`, `sectioned-form-block`, `otp-field-group`, `credential-form-block`, `auth-form-block`, `multi-field-form-block` | Input patterns for data collection |
+| **Display** | `metric-card`, `entity-card`, `feature-section` | Information display patterns |
+| **Utilities** | `action-group`, `metadata-list`, `form-section`, `form-field-group` | Composable utility components |
+
+### Usage Example
+
+```tsx
+import { CredentialFormBlock } from "@/blocks/credential-form-block"
+
+// Configure the form with props instead of hardcoded values
+<CredentialFormBlock
+  title="Sign In"
+  emailLabel="Email Address"
+  emailPlaceholder="your.email@example.com"
+  passwordLabel="Password"
+  submitLabel="Log In"
+  onSubmit={handleLogin}
+/>
+```
+
+All blocks maintain visual fidelity while allowing complete customization through props.
+
+---
+
 ## Quick Start
 
 Verify the registry is accessible and install your first component:
@@ -20,7 +64,7 @@ curl -I https://helvetiaai.github.io/ui-registry/registry.json
 npx shadcn add @local/button
 
 # Install a block
-npx shadcn add @local/login-block
+npx shadcn add @local/credential-form-block
 ```
 
 Expected response from curl: `HTTP/2 200` or `HTTP/1.1 200 OK`
@@ -43,7 +87,7 @@ The `ui-registry` is a **private Shadcn-compatible component registry** that:
 The registry provides several types of installable items:
 
 - **`registry:ui`** - Base UI components (button, card, input, etc.)
-- **`registry:block`** - Composite blocks combining multiple components (login forms, dashboards, etc.)
+- **`registry:block`** - Composite blocks combining multiple components (form patterns, metric displays, layout structures, etc.)
 - **`registry:component`** - Custom components
 - **`registry:lib`** - Utility libraries
 - **`registry:hook`** - React hooks
@@ -151,7 +195,7 @@ Install components or blocks from the registry using the `shadcn` CLI with the `
 npx shadcn add @local/button
 
 # Install a block
-npx shadcn add @local/login-block
+npx shadcn add @local/credential-form-block
 
 # Install multiple items
 npx shadcn add @local/card @local/input @local/label
@@ -394,7 +438,7 @@ curl -I https://helvetiaai.github.io/ui-registry/registry.json
 npx shadcn add @local/button
 
 # Install block
-npx shadcn add @local/login-block
+npx shadcn add @local/credential-form-block
 
 # Update existing component
 npx shadcn add @local/button --overwrite
@@ -425,7 +469,7 @@ curl https://helvetiaai.github.io/ui-registry/registry.json
 | Type | Install Command | Location |
 |------|----------------|----------|
 | **Atomic Component** | `npx shadcn add @local/button` | `src/components/ui/button.tsx` |
-| **Block** | `npx shadcn add @local/login-block` | `src/blocks/login-block.tsx` |
+| **Block** | `npx shadcn add @local/credential-form-block` | `src/blocks/login-block.tsx` |
 
 ### Verification Script
 

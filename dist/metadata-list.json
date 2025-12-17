@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "metadata-list",
+  "title": "Metadata List",
+  "description": "Display key/value pairs in a list format.",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/ui/MetadataList.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\nexport interface MetadataItem {\n  label: string\n  value: string | React.ReactNode\n}\n\nexport interface MetadataListProps extends React.ComponentProps<\"div\"> {\n  items: MetadataItem[]\n}\n\nexport function MetadataList({\n  items,\n  className,\n  ...props\n}: MetadataListProps) {\n  return (\n    <div\n      data-slot=\"metadata-list\"\n      className={cn(\"flex flex-col gap-2\", className)}\n      {...props}\n    >\n      {items.map((item, index) => (\n        <div\n          key={index}\n          className=\"flex items-center justify-between text-sm\"\n        >\n          <span className=\"text-muted-foreground\">{item.label}</span>\n          <span className=\"font-medium\">{item.value}</span>\n        </div>\n      ))}\n    </div>\n  )\n}\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "src\\components\\ui\\MetadataList.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\nexport interface MetadataItem {\n  label: string\n  value: string | React.ReactNode\n}\n\nexport interface MetadataListProps extends React.ComponentProps<\"div\"> {\n  items: MetadataItem[]\n}\n\nexport function MetadataList({\n  items,\n  className,\n  ...props\n}: MetadataListProps) {\n  return (\n    <div\n      data-slot=\"metadata-list\"\n      className={cn(\"flex flex-col gap-2\", className)}\n      {...props}\n    >\n      {items.map((item, index) => (\n        <div\n          key={index}\n          className=\"flex items-center justify-between text-sm\"\n        >\n          <span className=\"text-muted-foreground\">{item.label}</span>\n          <span className=\"font-medium\">{item.value}</span>\n        </div>\n      ))}\n    </div>\n  )\n}\n",
+      "type": "registry:ui",
+      "target": ""
+    },
+    {
+      "path": "src\\lib\\utils.ts",
+      "content": "import { clsx, type ClassValue } from \"clsx\"\nimport { twMerge } from \"tailwind-merge\"\n\nexport function cn(...inputs: ClassValue[]) {\n  return twMerge(clsx(inputs))\n}\n",
+      "type": "registry:lib",
+      "target": ""
+    }
+  ],
+  "type": "registry:ui"
+}

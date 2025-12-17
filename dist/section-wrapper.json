@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "section-wrapper",
+  "title": "Section Wrapper",
+  "description": "Consistent padding/margin wrapper for sections.",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/ui/SectionWrapper.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\nexport interface SectionWrapperProps extends React.ComponentProps<\"div\"> {\n  padding?: \"none\" | \"sm\" | \"md\" | \"lg\" | \"xl\"\n  margin?: \"none\" | \"sm\" | \"md\" | \"lg\" | \"xl\"\n}\n\nconst paddingMap = {\n  none: \"\",\n  sm: \"p-4\",\n  md: \"p-6\",\n  lg: \"p-8\",\n  xl: \"p-12\",\n}\n\nconst marginMap = {\n  none: \"\",\n  sm: \"m-4\",\n  md: \"m-6\",\n  lg: \"m-8\",\n  xl: \"m-12\",\n}\n\nexport function SectionWrapper({\n  padding = \"md\",\n  margin = \"none\",\n  children,\n  className,\n  ...props\n}: SectionWrapperProps) {\n  return (\n    <div\n      data-slot=\"section-wrapper\"\n      className={cn(\n        paddingMap[padding],\n        marginMap[margin],\n        className\n      )}\n      {...props}\n    >\n      {children}\n    </div>\n  )\n}\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "src\\components\\ui\\SectionWrapper.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\nexport interface SectionWrapperProps extends React.ComponentProps<\"div\"> {\n  padding?: \"none\" | \"sm\" | \"md\" | \"lg\" | \"xl\"\n  margin?: \"none\" | \"sm\" | \"md\" | \"lg\" | \"xl\"\n}\n\nconst paddingMap = {\n  none: \"\",\n  sm: \"p-4\",\n  md: \"p-6\",\n  lg: \"p-8\",\n  xl: \"p-12\",\n}\n\nconst marginMap = {\n  none: \"\",\n  sm: \"m-4\",\n  md: \"m-6\",\n  lg: \"m-8\",\n  xl: \"m-12\",\n}\n\nexport function SectionWrapper({\n  padding = \"md\",\n  margin = \"none\",\n  children,\n  className,\n  ...props\n}: SectionWrapperProps) {\n  return (\n    <div\n      data-slot=\"section-wrapper\"\n      className={cn(\n        paddingMap[padding],\n        marginMap[margin],\n        className\n      )}\n      {...props}\n    >\n      {children}\n    </div>\n  )\n}\n",
+      "type": "registry:ui",
+      "target": ""
+    },
+    {
+      "path": "src\\lib\\utils.ts",
+      "content": "import { clsx, type ClassValue } from \"clsx\"\nimport { twMerge } from \"tailwind-merge\"\n\nexport function cn(...inputs: ClassValue[]) {\n  return twMerge(clsx(inputs))\n}\n",
+      "type": "registry:lib",
+      "target": ""
+    }
+  ],
+  "type": "registry:ui"
+}

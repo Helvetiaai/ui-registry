@@ -1,0 +1,39 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "otp-field-group",
+  "title": "OTP Field Group",
+  "description": "Multi-field numeric input pattern for one-time passwords.",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "input"
+  ],
+  "files": [
+    {
+      "path": "src/blocks/otp-field-group.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Input } from \"@/components/ui/input\"\nimport { cn } from \"@/lib/utils\"\n\nexport interface OTPFieldGroupProps {\n  length?: number\n  onComplete?: (value: string) => void\n  autoFocus?: boolean\n  disabled?: boolean\n  className?: string\n}\n\nexport function OTPFieldGroup({\n  length = 6,\n  onComplete,\n  autoFocus = true,\n  disabled = false,\n  className,\n}: OTPFieldGroupProps) {\n  const [values, setValues] = React.useState<string[]>(Array(length).fill(\"\"))\n  const inputRefs = React.useRef<(HTMLInputElement | null)[]>([])\n\n  const handleChange = (index: number, value: string) => {\n    if (disabled) return\n\n    const newValue = value.replace(/[^0-9]/g, \"\").slice(0, 1)\n    const newValues = [...values]\n    newValues[index] = newValue\n    setValues(newValues)\n\n    if (newValue && index < length - 1) {\n      inputRefs.current[index + 1]?.focus()\n    }\n\n    if (newValues.every((v) => v !== \"\") && onComplete) {\n      onComplete(newValues.join(\"\"))\n    }\n  }\n\n  const handleKeyDown = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {\n    if (e.key === \"Backspace\" && !values[index] && index > 0) {\n      inputRefs.current[index - 1]?.focus()\n    }\n  }\n\n  const handlePaste = (e: React.ClipboardEvent) => {\n    e.preventDefault()\n    const pastedData = e.clipboardData.getData(\"text\").replace(/[^0-9]/g, \"\").slice(0, length)\n    const newValues = Array(length).fill(\"\")\n    pastedData.split(\"\").forEach((char, index) => {\n      if (index < length) {\n        newValues[index] = char\n      }\n    })\n    setValues(newValues)\n    if (pastedData.length === length && onComplete) {\n      onComplete(pastedData)\n    } else {\n      const nextIndex = Math.min(pastedData.length, length - 1)\n      inputRefs.current[nextIndex]?.focus()\n    }\n  }\n\n  return (\n    <div\n      data-slot=\"otp-field-group\"\n      className={cn(\"flex gap-2\", className)}\n      onPaste={handlePaste}\n    >\n      {Array.from({ length }).map((_, index) => (\n        <Input\n          key={index}\n          ref={(el) => {\n            inputRefs.current[index] = el\n          }}\n          type=\"text\"\n          inputMode=\"numeric\"\n          maxLength={1}\n          value={values[index]}\n          onChange={(e) => handleChange(index, e.target.value)}\n          onKeyDown={(e) => handleKeyDown(index, e)}\n          disabled={disabled}\n          autoFocus={autoFocus && index === 0}\n          className=\"h-12 w-12 text-center text-lg font-semibold\"\n        />\n      ))}\n    </div>\n  )\n}\n",
+      "type": "registry:component"
+    },
+    {
+      "path": "src\\blocks\\otp-field-group.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Input } from \"@/components/ui/input\"\nimport { cn } from \"@/lib/utils\"\n\nexport interface OTPFieldGroupProps {\n  length?: number\n  onComplete?: (value: string) => void\n  autoFocus?: boolean\n  disabled?: boolean\n  className?: string\n}\n\nexport function OTPFieldGroup({\n  length = 6,\n  onComplete,\n  autoFocus = true,\n  disabled = false,\n  className,\n}: OTPFieldGroupProps) {\n  const [values, setValues] = React.useState<string[]>(Array(length).fill(\"\"))\n  const inputRefs = React.useRef<(HTMLInputElement | null)[]>([])\n\n  const handleChange = (index: number, value: string) => {\n    if (disabled) return\n\n    const newValue = value.replace(/[^0-9]/g, \"\").slice(0, 1)\n    const newValues = [...values]\n    newValues[index] = newValue\n    setValues(newValues)\n\n    if (newValue && index < length - 1) {\n      inputRefs.current[index + 1]?.focus()\n    }\n\n    if (newValues.every((v) => v !== \"\") && onComplete) {\n      onComplete(newValues.join(\"\"))\n    }\n  }\n\n  const handleKeyDown = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {\n    if (e.key === \"Backspace\" && !values[index] && index > 0) {\n      inputRefs.current[index - 1]?.focus()\n    }\n  }\n\n  const handlePaste = (e: React.ClipboardEvent) => {\n    e.preventDefault()\n    const pastedData = e.clipboardData.getData(\"text\").replace(/[^0-9]/g, \"\").slice(0, length)\n    const newValues = Array(length).fill(\"\")\n    pastedData.split(\"\").forEach((char, index) => {\n      if (index < length) {\n        newValues[index] = char\n      }\n    })\n    setValues(newValues)\n    if (pastedData.length === length && onComplete) {\n      onComplete(pastedData)\n    } else {\n      const nextIndex = Math.min(pastedData.length, length - 1)\n      inputRefs.current[nextIndex]?.focus()\n    }\n  }\n\n  return (\n    <div\n      data-slot=\"otp-field-group\"\n      className={cn(\"flex gap-2\", className)}\n      onPaste={handlePaste}\n    >\n      {Array.from({ length }).map((_, index) => (\n        <Input\n          key={index}\n          ref={(el) => {\n            inputRefs.current[index] = el\n          }}\n          type=\"text\"\n          inputMode=\"numeric\"\n          maxLength={1}\n          value={values[index]}\n          onChange={(e) => handleChange(index, e.target.value)}\n          onKeyDown={(e) => handleKeyDown(index, e)}\n          disabled={disabled}\n          autoFocus={autoFocus && index === 0}\n          className=\"h-12 w-12 text-center text-lg font-semibold\"\n        />\n      ))}\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": ""
+    },
+    {
+      "path": "src\\components\\ui\\input.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\nfunction Input({ className, type, ...props }: React.ComponentProps<\"input\">) {\n  return (\n    <input\n      type={type}\n      data-slot=\"input\"\n      className={cn(\n        \"dark:bg-input/30 border-input focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:aria-invalid:border-destructive/50 h-9 rounded-md border bg-transparent px-2.5 py-1 text-base shadow-xs transition-[color,box-shadow] file:h-7 file:text-sm file:font-medium focus-visible:ring-[3px] aria-invalid:ring-[3px] md:text-sm file:text-foreground placeholder:text-muted-foreground w-full min-w-0 outline-none file:inline-flex file:border-0 file:bg-transparent disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nexport { Input }\n",
+      "type": "registry:ui",
+      "target": ""
+    },
+    {
+      "path": "src\\lib\\utils.ts",
+      "content": "import { clsx, type ClassValue } from \"clsx\"\nimport { twMerge } from \"tailwind-merge\"\n\nexport function cn(...inputs: ClassValue[]) {\n  return twMerge(clsx(inputs))\n}\n",
+      "type": "registry:lib",
+      "target": ""
+    }
+  ],
+  "type": "registry:block"
+}

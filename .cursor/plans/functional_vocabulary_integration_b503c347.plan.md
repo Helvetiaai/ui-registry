@@ -10,22 +10,22 @@ todos:
     status: completed
   - id: fetch-shadcn
     content: Fetch actual Shadcn block code from their registry (sidebar, login/signup, OTP, calendar, featured)
-    status: in_progress
+    status: completed
   - id: create-shadcn-blocks
     content: Create 5 new functional blocks (sidebar-layout, auth-form-block, otp-field-group, calendar-widget, feature-section) preserving Shadcn JSX/Tailwind verbatim
-    status: pending
+    status: completed
   - id: create-primitives
     content: Create 8 new UI primitives (FormSection, FormFieldGroup, MetricCard, EntityCard, Sidebar, ActionGroup, MetadataList, SectionWrapper)
-    status: pending
+    status: completed
   - id: update-registry-json
     content: Update registry.json with all renamed blocks, new blocks, new primitives, and corrected metadata
-    status: pending
+    status: completed
   - id: update-docs
     content: Add Functional Vocabulary Mode section and category table to docs/registry-guidelines.md
-    status: pending
+    status: completed
   - id: validate-build
     content: Run registry:validate and registry:build, verify dist/ output, commit and tag v1.1-vocabulary
-    status: pending
+    status: completed
 ---
 
 # Functional Vocabulary Integration Plan
