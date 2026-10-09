@@ -1,0 +1,727 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thai Flashcard Components</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&family=Trirong:wght@400;500;600&display=swap" rel="stylesheet">
+<!--
+  Shortlist of uiverse.io components, restyled to the Thai app palette.
+  Every component below is MIT licensed (uiverse.io). Each block keeps its
+  original author + link in a comment. Hover triggers were swapped for tap
+  triggers (checkbox / radio / :active), since the app is phone-only.
+  Each component's CSS uses its own class prefix, so a block can be copied alone.
+-->
+<style>
+/* ---------- Page shell + design tokens (not from uiverse) ---------- */
+:root {
+  --paper: #f6f2ea;
+  --card: #fffdf8;
+  --line: #ddd4c4;
+  --line-strong: #cfc4b0;
+  --ink: #1c1a17;
+  --muted: #625a4e;
+  --accent: #a63a1c;
+  --ok: #1e6b47;
+  --ok-bg: #e2efe5;
+  --study: "Trirong", serif;
+  --ui: "IBM Plex Sans Thai", system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--ui);
+  -webkit-tap-highlight-color: transparent;
+}
+.page { max-width: 430px; margin: 0 auto; padding: 24px 16px 48px; }
+.page > h1 { font-size: 22px; font-weight: 600; margin: 0 0 4px; }
+.page > p.lede { color: var(--muted); font-size: 14px; margin: 0 0 20px; line-height: 1.5; }
+.job { font-size: 13px; font-weight: 600; letter-spacing: .02em; text-transform: uppercase; color: var(--muted); margin: 28px 0 10px; }
+.demo {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+.demo-label {
+  display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--line);
+  font-size: 13px; color: var(--muted);
+}
+.demo-label b { color: var(--ink); font-weight: 600; }
+.demo-label a { color: var(--accent); text-decoration: none; }
+.pick {
+  font-size: 11px; font-weight: 600; color: var(--card); background: var(--accent);
+  padding: 2px 8px; border-radius: 999px;
+}
+.stage { padding: 24px 16px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.hint { font-size: 12px; color: var(--muted); margin: 0; }
+.sr { position: absolute; opacity: 0; width: 1px; height: 1px; pointer-events: none; }
+</style>
+</head>
+<body>
+<main class="page">
+<h1>ชุดคอมโพเนนต์</h1>
+<p class="lede">16 components from uiverse.io, 2 per job, restyled to the app palette. Everything is tap-driven: try them.</p>
+
+<!-- ============================================================
+     a. PRESSABLE ANSWER BUTTONS
+     ============================================================ -->
+<div class="job">a · Pressable answer buttons</div>
+
+<!-- a1 · From Uiverse.io by KhelVers — https://uiverse.io/KhelVers/orange-lionfish-62 (MIT)
+     Changes: pill → 14px radius, thick blue border → paper border + solid ledge,
+     radio-driven correct state, Trirong for answer text. -->
+<style>
+.ka-q { font-family: var(--study); font-size: 30px; margin: 0 0 4px; }
+.ka-list { width: 100%; display: grid; gap: 14px; }
+.ka-btn {
+  display: flex; align-items: center; justify-content: center;
+  min-height: 56px;
+  padding: 12px 18px;
+  font-family: var(--study); font-size: 20px; font-weight: 500;
+  color: var(--ink);
+  background: var(--card);
+  border: 2px solid var(--line-strong);
+  border-radius: 14px;
+  box-shadow: 0 6px 0 var(--line-strong);
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  top: 0;
+  transition: top .06s, box-shadow .06s, background-color .15s, border-color .15s;
+}
+.ka-btn:active { top: 6px; box-shadow: 0 0 0 var(--line-strong); }
+.ka-list input:checked + .ka-btn { top: 6px; box-shadow: 0 0 0; }
+.ka-list input.ok:checked + .ka-btn { background: var(--ok-bg); border-color: var(--ok); color: var(--ok); }
+.ka-list input.no:checked + .ka-btn { border-color: var(--accent); color: var(--accent); }
+</style>
+<section class="demo">
+  <div class="demo-label"><span class="pick">Top pick</span><b>a1</b> 3D press answer · <a href="https://uiverse.io/KhelVers/orange-lionfish-62">KhelVers ↗</a></div>
+  <div class="stage">
+    <p class="ka-q">รับประทาน</p>
+    <div class="ka-list">
+      <input class="sr ok" type="radio" name="ka" id="ka1"><label class="ka-btn" for="ka1">กิน (สุภาพ)</label>
+      <input class="sr no" type="radio" name="ka" id="ka2"><label class="ka-btn" for="ka2">นอนหลับ</label>
+      <input class="sr no" type="radio" name="ka" id="ka3"><label class="ka-btn" for="ka3">สัญญา</label>
+    </div>
+  </div>
+</section>
+
+<!-- a2 · From Uiverse.io by Sujanthapast0 — https://uiverse.io/Sujanthapast0/serious-rattlesnake-31 (MIT)
+     Changes: hover-lift dropped (no hover on phones); the hard ink shadow is
+     always visible and collapses on :active. Fully rounded → used as Talk reply chips. -->
+<style>
+.sj-thread { width: 100%; display: flex; flex-direction: column; gap: 10px; }
+.sj-bubble {
+  align-self: flex-start; max-width: 85%;
+  font-family: var(--study); font-size: 18px; line-height: 1.5;
+  background: var(--paper); border: 1px solid var(--line);
+  border-radius: 16px 16px 16px 4px; padding: 10px 14px;
+}
+.sj-chips { display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-end; padding-top: 6px; }
+.sj-chip {
+  min-height: 44px;
+  padding: 8px 18px;
+  font-family: var(--study); font-size: 17px; font-weight: 500;
+  color: var(--ink);
+  background: var(--card);
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  box-shadow: 0 4px 0 var(--ink);
+  cursor: pointer;
+  transition: transform .08s, box-shadow .08s;
+}
+.sj-chip:active { transform: translateY(4px); box-shadow: 0 0 0 var(--ink); }
+</style>
+<section class="demo">
+  <div class="demo-label"><b>a2</b> Ink-shadow reply chip · <a href="https://uiverse.io/Sujanthapast0/serious-rattlesnake-31">Sujanthapast0 ↗</a></div>
+  <div class="stage">
+    <div class="sj-thread">
+      <div class="sj-bubble">วันนี้คุณรับประทานอะไรหรือยังคะ</div>
+      <div class="sj-chips">
+        <button class="sj-chip">ยังเลยครับ</button>
+        <button class="sj-chip">กินข้าวแล้ว</button>
+        <button class="sj-chip">ไม่หิว</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     b. FLIP CARD
+     ============================================================ -->
+<div class="job">b · Flip card (reveal)</div>
+
+<!-- b1 · From Uiverse.io by joe-watson-sbf — https://uiverse.io/joe-watson-sbf/little-goat-24 (MIT)
+     Changes: gradient faces → flat paper; the "folded corner" is rebuilt as a
+     flat pseudo-element; hover → tap (checkbox). -->
+<style>
+.jw-card { width: 240px; height: 300px; perspective: 1000px; cursor: pointer; display: block; }
+.jw-inner {
+  display: block;
+  position: relative; width: 100%; height: 100%;
+  transition: transform .7s cubic-bezier(.3,.7,.2,1);
+  transform-style: preserve-3d;
+}
+.jw-toggle:checked + .jw-card .jw-inner { transform: rotateY(180deg); }
+.jw-front, .jw-back {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+  -webkit-backface-visibility: hidden; backface-visibility: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: 16px;
+  box-shadow: 0 6px 14px rgba(28,26,23,.08);
+  overflow: hidden;
+}
+.jw-front { background: var(--card); }
+.jw-front::after {          /* flat dog-ear, replaces the gradient trick */
+  content: ""; position: absolute; right: 0; bottom: 0;
+  width: 34px; height: 34px;
+  background: var(--line);
+  clip-path: polygon(100% 0, 0 100%, 0 0);
+  box-shadow: none;
+}
+.jw-front::before {
+  content: ""; position: absolute; right: 0; bottom: 0;
+  width: 34px; height: 34px; background: var(--paper);
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+}
+.jw-back { background: var(--accent); color: var(--card); transform: rotateY(180deg); }
+.jw-word, .jw-sub, .jw-mean, .vd-word, .vd-mean, .vd-sub { display: block; }
+.jw-word { font-family: var(--study); font-size: 40px; font-weight: 500; margin: 0; }
+.jw-sub { font-size: 13px; margin: 0; color: var(--muted); }
+.jw-back .jw-sub { color: rgba(255,253,248,.8); }
+.jw-mean { font-family: var(--ui); font-size: 22px; font-weight: 600; margin: 0; }
+</style>
+<section class="demo">
+  <div class="demo-label"><span class="pick">Top pick</span><b>b1</b> Dog-ear flip card · <a href="https://uiverse.io/joe-watson-sbf/little-goat-24">joe-watson-sbf ↗</a></div>
+  <div class="stage">
+    <input class="sr jw-toggle" type="checkbox" id="jw1">
+    <label class="jw-card" for="jw1">
+      <span class="jw-inner">
+        <span class="jw-front"><span class="jw-word">สังเกต</span><span class="jw-sub">แตะเพื่อดูความหมาย</span></span>
+        <span class="jw-back"><span class="jw-mean">to notice, observe</span><span class="jw-sub">sà-ngèet</span></span>
+      </span>
+    </label>
+  </div>
+</section>
+
+<!-- b2 · From Uiverse.io by vamsidevendrakumar — https://uiverse.io/vamsidevendrakumar/soft-shrimp-94 (MIT)
+     Changes: purple/orange → card/ink faces, 10px border → 1px paper border, hover → tap. -->
+<style>
+.vd-card { width: 100%; max-width: 320px; height: 190px; perspective: 1000px; cursor: pointer; display: block; }
+.vd-inner { display: block; width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform .8s; }
+.vd-toggle:checked + .vd-card .vd-inner { transform: rotateY(180deg); }
+.vd-front, .vd-back {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  border-radius: 16px;
+}
+.vd-front { background: var(--card); border: 1px solid var(--line-strong); }
+.vd-back { background: var(--ink); color: var(--card); transform: rotateY(180deg); }
+.vd-word { font-family: var(--study); font-size: 36px; margin: 0; }
+.vd-mean { font-size: 20px; font-weight: 600; margin: 0; }
+.vd-sub { font-size: 13px; margin: 0; opacity: .7; }
+</style>
+<section class="demo">
+  <div class="demo-label"><b>b2</b> Plain flip card · <a href="https://uiverse.io/vamsidevendrakumar/soft-shrimp-94">vamsidevendrakumar ↗</a></div>
+  <div class="stage">
+    <input class="sr vd-toggle" type="checkbox" id="vd1">
+    <label class="vd-card" for="vd1">
+      <span class="vd-inner">
+        <span class="vd-front"><span class="vd-word">ไฟเขียว</span><span class="vd-sub">แตะเพื่อพลิก</span></span>
+        <span class="vd-back"><span class="vd-mean">green light; approval</span><span class="vd-sub">fai khǐao</span></span>
+      </span>
+    </label>
+  </div>
+</section>
+
+<!-- ============================================================
+     c. CORRECT / WRONG FEEDBACK
+     ============================================================ -->
+<div class="job">c · Correct / wrong feedback</div>
+
+<!-- c1 · From Uiverse.io by mrpumps31232 — https://uiverse.io/mrpumps31232/heavy-bear-50 (MIT)
+     Changes: green #4CAF50 → app correct green, 30px → 28px icon inside a
+     44px+ answer row, circle + tick still draw themselves via stroke-dashoffset. -->
+<style>
+.mp-row {
+  width: 100%; min-height: 56px;
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 16px;
+  font-family: var(--study); font-size: 20px;
+  background: var(--card);
+  border: 2px solid var(--line-strong);
+  border-radius: 14px;
+  cursor: pointer;
+  transition: background-color .25s, border-color .25s, color .25s;
+}
+.mp-circle {
+  position: relative; flex: none;
+  width: 28px; height: 28px; border-radius: 50%;
+  border: 2px solid var(--line-strong);
+  transition: all .3s;
+}
+.mp-check {
+  position: absolute; inset: -2px; width: 28px; height: 28px;
+  fill: none; stroke: var(--card); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round;
+  opacity: 0; transition: opacity .2s;
+}
+.mp-check circle { stroke-dasharray: 166; stroke-dashoffset: 166; transition: stroke-dashoffset .35s; }
+.mp-check path { stroke-dasharray: 50; stroke-dashoffset: 50; transition: stroke-dashoffset .3s .25s; }
+.mp-input:checked + .mp-row { background: var(--ok-bg); border-color: var(--ok); color: var(--ok); }
+.mp-input:checked + .mp-row .mp-circle { background: var(--ok); border-color: var(--ok); }
+.mp-input:checked + .mp-row .mp-check { opacity: 1; }
+.mp-input:checked + .mp-row .mp-check circle,
+.mp-input:checked + .mp-row .mp-check path { stroke-dashoffset: 0; }
+</style>
+<section class="demo">
+  <div class="demo-label"><span class="pick">Top pick</span><b>c1</b> Self-drawing check · <a href="https://uiverse.io/mrpumps31232/heavy-bear-50">mrpumps31232 ↗</a></div>
+  <div class="stage">
+    <input class="sr mp-input" type="checkbox" id="mp1">
+    <label class="mp-row" for="mp1">
+      <span class="mp-circle"><svg class="mp-check" viewBox="0 0 52 52"><circle r="25" cx="26" cy="26"/><path d="M16 26l9.2 8.4 17.4-21.4"/></svg></span>
+      สังเกต
+    </label>
+    <p class="hint">Tap the answer: the ring and tick draw in.</p>
+  </div>
+</section>
+
+<!-- c2 · From Uiverse.io by gharsh11032000 — https://uiverse.io/gharsh11032000/cuddly-squid-93 (MIT)
+     Changes: dark pill → paper answer row; the red wipe-up fill and the shake
+     now fire on tap (:checked) instead of hover; rotate shake toned to ±3deg + nudge. -->
+<style>
+.gh-row {
+  position: relative; overflow: hidden;
+  width: 100%; min-height: 56px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 16px;
+  font-family: var(--study); font-size: 20px; color: var(--ink);
+  background: var(--card);
+  border: 2px solid var(--line-strong);
+  border-radius: 14px;
+  cursor: pointer;
+  transition: border-color .3s, color .3s;
+}
+.gh-row span { position: relative; z-index: 1; display: flex; align-items: center; }
+.gh-row::before {
+  content: ""; position: absolute; inset: 0;
+  translate: 0 105%;
+  background: var(--accent);
+  transition: translate .3s cubic-bezier(.23,1,.32,1);
+}
+.gh-row svg { width: 26px; height: 26px; fill: var(--line-strong); transition: fill .3s; }
+.gh-input:checked + .gh-row { animation: gh-shake .35s linear 1; border-color: var(--accent); color: var(--card); }
+.gh-input:checked + .gh-row::before { translate: 0 0; }
+.gh-input:checked + .gh-row svg { fill: var(--card); }
+@keyframes gh-shake {
+  0%, 100% { transform: translateX(0) rotate(0); }
+  20% { transform: translateX(-6px) rotate(-2deg); }
+  40% { transform: translateX(6px) rotate(2deg); }
+  60% { transform: translateX(-4px) rotate(-1deg); }
+  80% { transform: translateX(3px) rotate(1deg); }
+}
+</style>
+<section class="demo">
+  <div class="demo-label"><span class="pick">Top pick</span><b>c2</b> Wrong: wipe + shake · <a href="https://uiverse.io/gharsh11032000/cuddly-squid-93">gharsh11032000 ↗</a></div>
+  <div class="stage">
+    <input class="sr gh-input" type="checkbox" id="gh1">
+    <label class="gh-row" for="gh1">
+      <span>สังเกตุ</span>
+      <span><svg viewBox="0 0 24 24"><path d="m12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20zm0 1.5a8.5 8.5 0 1 0 0 17 8.5 8.5 0 0 0 0-17zm0 7.43 2.72-2.72a.75.75 0 0 1 1.06 1.06L13.06 12l2.73 2.73a.75.75 0 0 1-1.06 1.06L12 13.06l-2.73 2.73a.75.75 0 0 1-1.06-1.06L10.94 12 8.22 9.28a.75.75 0 0 1 1.06-1.06z"/></svg></span>
+    </label>
+    <p class="hint">Tap the misspelling: it shakes and fills ink red. Pair with c1 for the right answer.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     d. TOOLTIP / POPOVER ON A WORD IN A PARAGRAPH
+     ============================================================ -->
+<div class="job">d · Word popover in a paragraph</div>
+
+<!-- d1 · From Uiverse.io by Quezaquo — https://uiverse.io/Quezaquo/bitter-wolverine-27 (MIT)
+     Changes: hover → tap (radio, so one popover is open at a time); kept the
+     springy "goPopup" stretch; white bubble → card bubble with paper border;
+     endless bounce on the text removed (distracting while reading). -->
+<style>
+.qz-story { font-family: var(--study); font-size: 19px; line-height: 2.1; margin: 0; padding-top: 34px; }
+.qz-word { position: relative; display: inline-block; cursor: pointer; }
+.qz-word > .qz-txt {
+  text-decoration: underline dotted var(--line-strong);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+  padding: 6px 1px;          /* fattens the tap target vertically */
+  border-radius: 6px;
+}
+.qz-tip {
+  position: absolute; left: 50%; bottom: 100%;
+  min-width: max-content;
+  padding: 6px 12px;
+  font-family: var(--ui); font-size: 14px; line-height: 1.4; text-align: center; color: var(--ink);
+  background: var(--card);
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(28,26,23,.08);
+  opacity: 0; visibility: hidden;
+  transform: translate(-50%, 0) scaleY(0);
+  transform-origin: center bottom;
+  z-index: 2;
+  pointer-events: none;
+}
+.qz-tip::after {
+  content: ""; position: absolute; left: 50%; bottom: -6px;
+  width: 10px; height: 10px; background: var(--card);
+  border-right: 1px solid var(--line-strong); border-bottom: 1px solid var(--line-strong);
+  transform: translateX(-50%) rotate(45deg);
+}
+.qz-tip b { color: var(--accent); font-weight: 600; }
+.qz-in:checked + .qz-word > .qz-txt { background: var(--paper); text-decoration-color: var(--accent); }
+.qz-in:checked + .qz-word > .qz-tip {
+  visibility: visible;
+  animation: qz-pop .45s cubic-bezier(.68,-.55,.27,1.55) forwards;
+}
+@keyframes qz-pop {
+  0%   { transform: translate(-50%, 6px) scaleY(0); opacity: 0; }
+  60%  { transform: translate(-50%, -4px) scaleY(1.1); opacity: 1; }
+  100% { transform: translate(-50%, -4px) scaleY(1); opacity: 1; }
+}
+</style>
+<section class="demo">
+  <div class="demo-label"><span class="pick">Top pick</span><b>d1</b> Springy word popover · <a href="https://uiverse.io/Quezaquo/bitter-wolverine-27">Quezaquo ↗</a></div>
+  <div class="stage">
+    <p class="qz-story">
+      ตำรวจจราจร<input class="sr qz-in" type="radio" name="qz" id="qz1" checked><label class="qz-word" for="qz1"><span class="qz-txt">สังเกตุ</span><span class="qz-tip"><b>สะกดผิด</b> → สังเกต</span></label>ว่ารถหลายคันจอดรอ<input class="sr qz-in" type="radio" name="qz" id="qz2"><label class="qz-word" for="qz2"><span class="qz-txt">ไฟเขียว</span><span class="qz-tip">green light</span></label>นานเกินไป
+      จึงเชิญผู้ขับขี่ลงมา<input class="sr qz-in" type="radio" name="qz" id="qz3"><label class="qz-word" for="qz3"><span class="qz-txt">รับประทาน</span><span class="qz-tip">to eat (formal)</span></label>น้ำดื่มริมทาง
+    </p>
+  </div>
+</section>
+
+<!-- d2 · From Uiverse.io by Cksunandh — https://uiverse.io/Cksunandh/afraid-snail-51 (MIT)
+     Changes: green pill button → inline word token; bubble keeps the
+     slide-up + fade and rotated-square arrow, recolored to ink; hover → tap. -->
+<style>
+.ck-story { font-family: var(--study); font-size: 19px; line-height: 2.1; margin: 0; padding-top: 30px; }
+.ck-word { position: relative; display: inline-block; cursor: pointer; }
+.ck-txt { padding: 4px 6px; border-radius: 8px; border-bottom: 2px solid var(--line-strong); }
+.ck-tip {
+  position: absolute; left: 50%; top: 0;
+  transform: translateX(-50%);
+  padding: 4px 12px;
+  font-family: var(--ui); font-size: 14px; white-space: nowrap; color: var(--card);
+  background: var(--ink);
+  border-radius: 999px;
+  opacity: 0; pointer-events: none;
+  transition: top .3s, opacity .3s;
+}
+.ck-tip::before {
+  content: ""; position: absolute; left: 50%; bottom: -.2em;
+  width: .6em; height: .6em; background: var(--ink);
+  transform: translateX(-50%) rotate(45deg);
+}
+.ck-in:checked + .ck-word .ck-tip { top: -110%; opacity: 1; }
+.ck-in:checked + .ck-word .ck-txt { background: var(--ok-bg); border-color: var(--ok); }
+</style>
+<section class="demo">
+  <div class="demo-label"><b>d2</b> Ink pill bubble · <a href="https://uiverse.io/Cksunandh/afraid-snail-51">Cksunandh ↗</a></div>
+  <div class="stage">
+    <p class="ck-story">
+      เมื่อ<input class="sr ck-in" type="radio" name="ck" id="ck1" checked><label class="ck-word" for="ck1"><span class="ck-tip">to notice</span><span class="ck-txt">สังเกต</span></label>ดี ๆ จะเห็นว่าทุกคนรอ<input class="sr ck-in" type="radio" name="ck" id="ck2"><label class="ck-word" for="ck2"><span class="ck-tip">green light</span><span class="ck-txt">ไฟเขียว</span></label>
+    </p>
+  </div>
+</section>
+
+<!-- ============================================================
+     e. PAPER / DOT-GRID BACKGROUND
+     ============================================================ -->
+<div class="job">e · Paper texture / dot grid</div>
+<!-- Note: both patterns are *drawn* with hard-stop CSS gradients (that is how CSS
+     makes lines and dots). Nothing visibly fades, so they pass the no-gradient rule. -->
+
+<!-- e1 · From Uiverse.io by artvelog — https://uiverse.io/artvelog/splendid-quail-83 (MIT)
+     Changes: grey → paper, rule lines → border colour, pink margin → ink red at
+     low opacity, line height matched to Trirong reading text. -->
+<style>
+.av-paper {
+  width: 100%;
+  padding: 6px 16px 6px 44px;
+  background-color: var(--card);
+  background-image:
+    linear-gradient(90deg, transparent 30px, rgba(166,58,28,.35) 30px, rgba(166,58,28,.35) 31.5px, transparent 31.5px),
+    linear-gradient(transparent 33px, var(--line) 33px, var(--line) 34px, transparent 34px);
+  background-size: 100% 34px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+}
+.av-paper p { margin: 0; font-family: var(--study); font-size: 18px; line-height: 34px; }
+</style>
+<section class="demo">
+  <div class="demo-label"><span class="pick">Top pick</span><b>e1</b> Ruled notebook paper · <a href="https://uiverse.io/artvelog/splendid-quail-83">artvelog ↗</a></div>
+  <div class="stage">
+    <div class="av-paper">
+      <p>ข่าวเช้า: ตำรวจสังเกตว่า</p>
+      <p>รถหลายคันจอดรอไฟเขียว</p>
+      <p>นานกว่าปกติ</p>
+      <p>&nbsp;</p>
+    </div>
+  </div>
+</section>
+
+<!-- e2 · From Uiverse.io by BadlyWrittenStylesheet — https://uiverse.io/BadlyWrittenStylesheet/fluffy-bear-71 (MIT)
+     Changes: black dots → border-strong dots on paper, 3rem → 22px offset grid. -->
+<style>
+.bw-dots {
+  --size: 22px;
+  width: 100%; height: 160px;
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(var(--line-strong) 7%, transparent 8%),
+    radial-gradient(var(--line-strong) 7%, transparent 8%);
+  background-position: 0 0, calc(var(--size) / 2) calc(var(--size) / 2);
+  background-size: var(--size) var(--size);
+  border-radius: 12px;
+  display: grid; place-items: center;
+}
+.bw-dots span {
+  font-family: var(--study); font-size: 26px;
+  background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 14px 24px;
+}
+</style>
+<section class="demo">
+  <div class="demo-label"><b>e2</b> Offset dot grid · <a href="https://uiverse.io/BadlyWrittenStylesheet/fluffy-bear-71">BadlyWrittenStylesheet ↗</a></div>
+  <div class="stage">
+    <div class="bw-dots"><span>รับประทาน</span></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     f. LOADER (5-10 s while cards generate)
+     ============================================================ -->
+<div class="job">f · Loader while cards generate</div>
+
+<!-- f1 · From Uiverse.io by vinodjangid07 — https://uiverse.io/vinodjangid07/good-cow-5 (MIT)
+     Changes: salmon/slate → ink red pages on a muted spine, slowed slightly. -->
+<style>
+.vj-loader { display: flex; flex-direction: column; align-items: center; gap: 18px; padding: 18px 0 4px; }
+.vj-book {
+  --book: var(--accent); --cover: var(--muted);
+  width: 140px; height: 12px;
+  background: var(--book);
+  border-bottom: 3px solid var(--cover);
+  border-radius: 2px;
+  display: flex; align-items: flex-start; justify-content: flex-end;
+  position: relative;
+}
+.vj-page { width: 50%; height: 2px; background: var(--book); animation: vj-paging .9s ease-out infinite; transform-origin: left; }
+.vj-page2 { position: absolute; animation-duration: 1s; }
+@keyframes vj-paging { 10% { transform: rotateZ(0); } 100% { transform: rotateZ(-180deg); } }
+.vj-text { font-size: 14px; color: var(--muted); margin: 0; }
+</style>
+<section class="demo">
+  <div class="demo-label"><span class="pick">Top pick</span><b>f1</b> Page-flip book · <a href="https://uiverse.io/vinodjangid07/good-cow-5">vinodjangid07 ↗</a></div>
+  <div class="stage">
+    <div class="vj-loader">
+      <div class="vj-book"><div class="vj-page"></div><div class="vj-page vj-page2"></div></div>
+      <p class="vj-text">กำลังเขียนข่าวของวันนี้…</p>
+    </div>
+  </div>
+</section>
+
+<!-- f2 · From Uiverse.io by vk-uiux — https://uiverse.io/vk-uiux/neat-goat-26 (MIT)
+     Changes: the shimmer was a moving linear-gradient; replaced with a flat
+     opacity pulse to respect the no-gradient rule. Shape now mirrors a Drill card. -->
+<style>
+.vk-card {
+  width: 100%; padding: 18px;
+  background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+  display: grid; gap: 12px;
+}
+.vk-sk { background: var(--line); border-radius: 10px; animation: vk-pulse 1.4s ease-in-out infinite; }
+.vk-title { height: 34px; width: 55%; margin: 4px auto 10px; }
+.vk-ans { height: 52px; border-radius: 14px; }
+.vk-ans:nth-child(3) { animation-delay: .15s; }
+.vk-ans:nth-child(4) { animation-delay: .3s; }
+@keyframes vk-pulse { 0%, 100% { opacity: 1; } 50% { opacity: .45; } }
+</style>
+<section class="demo">
+  <div class="demo-label"><b>f2</b> Skeleton Drill card · <a href="https://uiverse.io/vk-uiux/neat-goat-26">vk-uiux ↗</a></div>
+  <div class="stage">
+    <div class="vk-card">
+      <div class="vk-sk vk-title"></div>
+      <div class="vk-sk vk-ans"></div>
+      <div class="vk-sk vk-ans"></div>
+      <div class="vk-sk vk-ans"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     g. THEME TOGGLE
+     ============================================================ -->
+<div class="job">g · Light / dark toggle</div>
+
+<!-- g1 · From Uiverse.io by DawidMazurek4 — https://uiverse.io/DawidMazurek4/tough-monkey-56 (MIT)
+     Changes: black/yellow → ink track with paper moon that rounds into a sun;
+     wrapped in a 44px hit area. -->
+<style>
+.dm-switch { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 72px; height: 48px; cursor: pointer; }
+.dm-switch input { opacity: 0; width: 0; height: 0; position: absolute; }
+.dm-slider {
+  position: relative; width: 60px; height: 34px;
+  background: var(--ink);
+  border-radius: 999px;
+  transition: .4s;
+}
+.dm-slider::before {          /* the moon / sun disc */
+  content: ""; position: absolute;
+  width: 24px; height: 24px; left: 5px; bottom: 5px;
+  border-radius: 50%;
+  background: var(--paper);
+  transition: .4s;
+}
+.dm-slider::after {           /* the bite that makes the crescent */
+  content: ""; position: absolute;
+  width: 20px; height: 20px; left: 12px; top: 3px;
+  border-radius: 50%;
+  background: var(--ink);
+  transition: .4s;
+}
+.dm-switch input:checked + .dm-slider { background: var(--accent); }
+.dm-switch input:checked + .dm-slider::before { transform: translateX(26px); }
+.dm-switch input:checked + .dm-slider::after { left: 80%; width: 0; height: 0; background: var(--accent); }
+.dm-row { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--muted); }
+</style>
+<section class="demo">
+  <div class="demo-label"><b>g1</b> Moon-to-sun switch · <a href="https://uiverse.io/DawidMazurek4/tough-monkey-56">DawidMazurek4 ↗</a></div>
+  <div class="stage">
+    <div class="dm-row">มืด <label class="dm-switch"><input type="checkbox"><span class="dm-slider"></span></label> สว่าง</div>
+  </div>
+</section>
+
+<!-- g2 · From Uiverse.io by JaydipPrajapati1910 — https://uiverse.io/JaydipPrajapati1910/splendid-panda-57 (MIT)
+     Changes: 140×30 → 168×44 so each half is a real touch target; grey/black →
+     paper/ink; English labels → Thai; red/orange icons → muted. Input now covers the whole switch. -->
+<style>
+.jp-wrap { display: flex; align-items: center; gap: 10px; color: var(--muted); }
+.jp-wrap svg { width: 20px; height: 20px; }
+.jp-switch { position: relative; display: inline-block; }
+.jp-switch input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; margin: 0; z-index: 1; cursor: pointer; }
+.jp-inner {
+  display: block; position: relative; overflow: hidden;
+  width: 168px; height: 44px;
+  background: var(--paper);
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  font-size: 14px; font-weight: 500; color: var(--muted);
+  transition: all .3s ease;
+}
+.jp-inner::before {           /* the label that is NOT selected */
+  content: attr(data-on);
+  position: absolute; top: 50%; right: 26px; transform: translateY(-50%);
+}
+.jp-inner::after {            /* the sliding knob with the selected label */
+  content: attr(data-off);
+  position: absolute; left: 3px; top: 3px;
+  width: 80px; height: 36px; line-height: 36px; text-align: center;
+  background: var(--card); color: var(--ink);
+  border-radius: 999px;
+  box-shadow: 0 1px 3px rgba(28,26,23,.2);
+  transition: all .3s ease;
+}
+.jp-switch input:checked + .jp-inner { background: var(--ink); border-color: var(--ink); color: rgba(255,253,248,.6); }
+.jp-switch input:checked + .jp-inner::after { content: attr(data-on); left: 83px; background: var(--muted); color: var(--card); }
+.jp-switch input:checked + .jp-inner::before { content: attr(data-off); right: auto; left: 26px; }
+</style>
+<section class="demo">
+  <div class="demo-label"><span class="pick">Top pick</span><b>g2</b> Labelled segment switch · <a href="https://uiverse.io/JaydipPrajapati1910/splendid-panda-57">JaydipPrajapati1910 ↗</a></div>
+  <div class="stage">
+    <div class="jp-wrap">
+      <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8z"/></svg>
+      <span class="jp-switch"><input type="checkbox" aria-label="ธีม"><span class="jp-inner" data-off="สว่าง" data-on="มืด"></span></span>
+      <svg viewBox="0 0 16 16" fill="currentColor"><path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/></svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     h. PROGRESS / STREAK
+     ============================================================ -->
+<div class="job">h · Progress / combo</div>
+
+<!-- h1 · From Uiverse.io by Juanes200122 — https://uiverse.io/Juanes200122/light-seahorse-74 (MIT)
+     Changes: four skill bars → one session bar; blue → ink red, grey track →
+     border colour; value bubble now shows the card count. -->
+<style>
+.jn-box { width: 100%; padding-top: 24px; }
+.jn-title { display: flex; justify-content: space-between; font-size: 13px; font-weight: 500; color: var(--muted); }
+.jn-bar { height: 10px; width: 100%; border-radius: 999px; margin-top: 8px; background: var(--line); }
+.jn-fill {
+  position: relative; display: block; height: 100%; width: 70%;
+  border-radius: 999px; background: var(--accent);
+  animation: jn-grow .5s ease-out both;
+}
+.jn-tip {
+  position: absolute; right: -16px; top: -32px;
+  font-size: 12px; font-weight: 600; color: var(--card);
+  padding: 2px 8px; border-radius: 6px; background: var(--accent);
+}
+.jn-tip::before {
+  content: ""; position: absolute; left: 50%; bottom: -3px; z-index: -1;
+  width: 10px; height: 10px; background: var(--accent);
+  transform: translateX(-50%) rotate(45deg);
+}
+@keyframes jn-grow { from { width: 0; } }
+</style>
+<section class="demo">
+  <div class="demo-label"><span class="pick">Top pick</span><b>h1</b> Bar with count bubble · <a href="https://uiverse.io/Juanes200122/light-seahorse-74">Juanes200122 ↗</a></div>
+  <div class="stage">
+    <div class="jn-box">
+      <div class="jn-title"><span>ฝึกวันนี้</span><span>เหลือ 3 ใบ</span></div>
+      <div class="jn-bar"><span class="jn-fill"><span class="jn-tip">7/10</span></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- h2 · From Uiverse.io by dylanharriscameron — https://uiverse.io/dylanharriscameron/ancient-falcon-18 (MIT)
+     Changes: re-purposed from an endless loader into a combo meter (width set per
+     streak). Blue stripes → hard-stop ink red stripes that slide; no fade or glow. -->
+<style>
+.dh-wrap { width: 100%; display: flex; align-items: center; gap: 12px; }
+.dh-label { font-size: 14px; font-weight: 600; color: var(--accent); white-space: nowrap; min-width: 64px; }
+.dh-bar {
+  flex: 1; height: 14px;
+  background: var(--card);
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  position: relative; overflow: hidden;
+}
+.dh-bar::before {
+  content: ""; position: absolute; inset: 0 auto 0 0;
+  width: var(--combo, 40%);
+  border-radius: 999px;
+  background-color: var(--accent);
+  background-image: repeating-linear-gradient(45deg, transparent 0 10px, rgba(255,253,248,.22) 10px 14px);
+  background-size: 200% 100%;
+  animation: dh-slide 1s linear infinite;
+  transition: width .4s cubic-bezier(.3,.7,.2,1);
+}
+@keyframes dh-slide { to { background-position: -40px 0; } }
+</style>
+<section class="demo">
+  <div class="demo-label"><b>h2</b> Striped combo meter · <a href="https://uiverse.io/dylanharriscameron/ancient-falcon-18">dylanharriscameron ↗</a></div>
+  <div class="stage">
+    <div class="dh-wrap"><span class="dh-label">คอมโบ ×4</span><div class="dh-bar" style="--combo:40%"></div></div>
+    <div class="dh-wrap"><span class="dh-label">คอมโบ ×8</span><div class="dh-bar" style="--combo:80%"></div></div>
+  </div>
+</section>
+
+</main>
+</body>
+</html>
